@@ -1,0 +1,16 @@
+# Core
+torch>=2.0
+torchvision>=0.15
+numpy>=1.24
+scipy>=1.10
+einops>=0.6
+
+# Shot counting
+numba>=0.58          # JIT for fast rectangle pruning
+pulp>=2.7            # CBC ILP solver for the set-cover step
+pandas>=1.5          # used by the adabox reference decomposition
+
+# Image I/O and visualization
+opencv-python>=4.5
+pillow>=9.0
+matplotlib>=3.5
