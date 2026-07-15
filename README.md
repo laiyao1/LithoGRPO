@@ -4,6 +4,7 @@
 
 [![Paper](https://img.shields.io/badge/arXiv-2606.00228-b31b1b.svg)](https://arxiv.org/abs/2606.00228)
 [![Conference](https://img.shields.io/badge/ICML-2026-blue.svg)](https://icml.cc/virtual/2026/poster/61189)
+[![Model](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Model-yellow.svg)](https://huggingface.co/laiyao1/LithoGRPO)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 </div>
