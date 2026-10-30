@@ -1,0 +1,2 @@
+# Copy to data_config.yaml and set your local dataset root.
+data_path: ./lithodata

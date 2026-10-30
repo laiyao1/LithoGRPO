@@ -14,3 +14,8 @@ pandas>=1.5          # used by the adabox reference decomposition
 opencv-python>=4.5
 pillow>=9.0
 matplotlib>=3.5
+
+# Original RL fine-tuning configuration and experiment logging
+PyYAML>=6.0
+wandb>=0.16
+tqdm>=4.60

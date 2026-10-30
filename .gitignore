@@ -23,3 +23,41 @@ results/
 checkpoints/
 *.pth
 *.ckpt
+
+# External assets and local RLFT runs
+external/
+wandb/
+.pytest_cache/
+.ruff_cache/
+
+# Local credentials and account configuration
+.env
+.env.*
+.aws/
+.ssh/
+.netrc
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+service-account*.json
+
+# Private assets and generated experiment artifacts
+*.pt
+*.safetensors
+data/
+datasets/
+lithodata/
+kernel/
+benchmark/
+logs/
+outputs/
+*.csv
+*.jsonl
+
+# Machine-specific dataset location
+config/data_config.yaml
+trivial_rf*/
+grpo_eval_*/
+images/

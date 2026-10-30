@@ -43,13 +43,13 @@ This repository is being open-sourced incrementally. **Currently released:**
 
 - [x] **Fast shot counting** — `FastShotCounter` (ours) and the `ShotCounter` reference baseline, plus the comparison/plotting example.
 
-**TODO (coming soon):**
+- [x] **Stage-3 RLFT code**, checkpoint-compatible MiniUnet, physics reward, and ODE/SDE inference/evaluation (see [setup and usage](docs/RLFT.md)).
 
-- [ ] GRPO reinforcement-learning fine-tuning code
-- [ ] Flow-matching prior (training + pretrained checkpoints)
-- [ ] Physics-based ILT reward and lithography simulator
-- [ ] End-to-end inference / mask-optimization pipeline
-- [ ] Datasets and evaluation scripts
+**Still external or unreleased:**
+
+- [ ] Stage-1/2 training and pretrained checkpoints
+- [ ] Lithography kernel assets and datasets
+- [ ] Full training and benchmark reproduction with the original external assets
 
 Stars and issues are welcome to track progress.
 
@@ -59,7 +59,7 @@ Stars and issues are welcome to track progress.
 
 ```bash
 # 1. Clone the repository
-git clone git@github.com:laiyao1/LithoGRPO.git
+git clone https://github.com/laiyao1/LithoGRPO.git
 cd LithoGRPO
 
 # 2. Create an environment (conda recommended)
@@ -114,22 +114,49 @@ PYTHONPATH=. python examples/compare_shots.py --num 12 --size 128 --seed 1 --out
 The fast counter tracks the reference ranking almost perfectly while running
 orders of magnitude faster.
 
-> 🔜 The flow-matching prior, GRPO fine-tuning, and inference pipeline will be
-> released next.
+> Stage-3 RLFT and ODE/SDE inference are available in [docs/RLFT.md](docs/RLFT.md).
+> Stage-1/2 training and pretrained weights remain unreleased.
+
+---
+
+## Stage 3: RL fine-tuning
+
+The RLFT training loop and ODE/SDE inference workflow are
+included, with four per-benchmark YAML profiles. Training requires the original
+SFT checkpoint, dataset, LithoBench layout/kernel assets, and a CUDA environment.
+See [setup, training, and inference instructions](docs/RLFT.md).
+
+```bash
+python train_litho_grpo.py --benchmark MetalSet
+```
+
+RLFT combines group-relative optimization with the physics-based reward for
+printability, process-window robustness, and shot count. The release includes
+dataset-specific training configurations, checkpoint loading, and ODE/SDE mask
+generation. Details of the training workflow, output files, and release
+validation are provided in [the RLFT guide](docs/RLFT.md).
 
 ---
 
 ## Repository structure
 
 ```
-LithoGRPO-open/
-├── shotcount/          # Shot counting
-│   ├── fast.py         #   FastShotCounter — maximal-rectangle + ILP cover (ours)
-│   └── reference.py    #   ShotCounter — adabox decomposition (LithoBench baseline)
-├── adabox/             # Vendored rectangular decomposition (MIT, see adabox/LICENSE)
-├── examples/
-│   └── compare_shots.py  # Fast vs. reference comparison → shot_correlation.png
-├── assets/             # Figures
+LithoGRPO/
+├── shotcount/               # Existing released shot counters
+├── adabox/                  # Existing rectangular-decomposition dependency
+├── train_litho_grpo.py      # GRPO reinforcement-learning fine-tuning
+├── infer_litho.py           # Original ODE/SDE inference, evaluation, and CSV
+├── model_litho.py           # Original MiniUnet and checkpoint parameter names
+├── rectified_flow.py       # Original flow helper
+├── lithobench/              # Original data loaders and evaluation
+├── pylitho/                 # Original lithography simulators
+├── pyilt/                   # Original EPE, visualization, and pixel-ILT helpers
+├── pycommon/                # Original settings, config loading, and GLP reader
+├── config/                  # Four RLFT profiles, simulator configs, data example
+├── docs/RLFT.md             # Setup, behavior, and verification scope
+├── third_party/licenses/   # Third-party license notices
+├── examples/compare_shots.py
+├── assets/
 └── requirements.txt
 ```
 

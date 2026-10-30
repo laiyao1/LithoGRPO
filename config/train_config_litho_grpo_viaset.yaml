@@ -1,0 +1,27 @@
+# RLFT profile with the original experiment hyperparameters.
+base_channels: 64
+epochs: 1000
+batch_size: 10
+num_generations: 6
+mini_batch_size: 2
+max_batch_per_step: 4
+lr_adjust_epoch: 1000
+batch_print_interval: 100
+checkpoint_save_interval: 1
+save_path: './checkpoints/v1.1-cfg-litho-grpo-ViaSet-bilinear-interpolation-guassian-noise'
+use_cfg: False
+use_amp: True
+device: 'cuda'
+lr: 0.000002
+noise_level: 0.1
+sde_steps: 1
+benchmark: ViaSet
+shot_weight: 1.0
+l2_weight: 1.0
+pvb_weight: 1.0
+epe_weight: 1.0
+load_path: 'checkpoints/v1.1-cfg-litho-finetune-ViaSet/MiniUnet_second_epoch_0.pth'
+grpo_beta: 0.0
+eval_interval_batches: 1
+save_interval_batches: 50
+max_grad_norm: 1.0
